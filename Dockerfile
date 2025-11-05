@@ -18,10 +18,11 @@ RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-h
     rm -rf /var/lib/apt/list/* && \
     sudo passwd -d kasm-user && \
     echo 'set -o history' >> $HOME/.bashrc && \
+    echo 'shopt -s histappend' >> $HOME/.bashrc && \
     echo 'export HISTSIZE=10000' >> $HOME/.bashrc && \
     echo 'export HISTFILESIZE=10000' >> $HOME/.bashrc && \
     echo 'export HISTCONTROL=ignoreboth:erasedups' >> $HOME/.bashrc && \
-    echo "export HISTFILE=\$HOME/.bash_history" >> $HOME/.bashrc && \
+    echo "export HISTFILE=/home/kasm-user/.bash_history" >> $HOME/.bashrc && \
     echo 'alias ll="ls -lah"' >> $HOME/.bashrc
 
 # Устанавливаем windsurf
