@@ -23,7 +23,11 @@ RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-h
     echo 'export HISTFILESIZE=10000' >> $HOME/.bashrc && \
     echo 'export HISTCONTROL=ignoreboth:erasedups' >> $HOME/.bashrc && \
     echo "export HISTFILE=/home/kasm-user/.bash_history" >> $HOME/.bashrc && \
-    echo 'alias ll="ls -lah"' >> $HOME/.bashrc
+    echo 'alias ll="ls -lah"' >> $HOME/.bashrc && \
+    echo 'if [ -n "$BASH_VERSION" ]; then' >> $HOME/.profile && \
+    echo 'if [ -f "/home/kasm-user/.bashrc" ]; then' >> $HOME/.profile && \
+    echo '    . /home/kasm-user/.bashrc"' >> $HOME/.profile && \
+    echo 'fi fi' >> $HOME/.profile
 
 # Устанавливаем windsurf
 RUN wget -qO- "https://windsurf-stable.codeiumdata.com/wVxQEIWkwPUEAGf3/windsurf.gpg" | gpg --dearmor > /usr/share/keyrings/windsurf-stable.gpg && \
