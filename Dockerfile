@@ -17,10 +17,12 @@ RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-h
     echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     rm -rf /var/lib/apt/list/* && \
     sudo passwd -d kasm-user && \
-    echo 'alias ll="ls -lah"' >> $HOME/.bashrc &&\
-    echo 'export HISTSIZE=10000' >> $HOME/.bashrc &&\
-    echo 'export HISTFILESIZE=10000' >> $HOME/.bashrc &&\
-    echo 'export HISTCONTROL=ignoreboth:erasedups' >> $HOME/.bashrc
+    echo 'set -o history' >> $HOME/.bashrc && \
+    echo 'export HISTSIZE=10000' >> $HOME/.bashrc && \
+    echo 'export HISTFILESIZE=10000' >> $HOME/.bashrc && \
+    echo 'export HISTCONTROL=ignoreboth:erasedups' >> $HOME/.bashrc && \
+    echo "export HISTFILE=\$HOME/.bash_history" >> $HOME/.bashrc && \
+    echo 'alias ll="ls -lah"' >> $HOME/.bashrc
 
 # Устанавливаем windsurf
 RUN wget -qO- "https://windsurf-stable.codeiumdata.com/wVxQEIWkwPUEAGf3/windsurf.gpg" | gpg --dearmor > /usr/share/keyrings/windsurf-stable.gpg && \
