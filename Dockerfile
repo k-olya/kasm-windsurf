@@ -13,7 +13,7 @@ RUN apt update \
     && sudo apt upgrade -y
 
 # Устанавливаем зависимости
-RUN apt install -y sudo wget gpg rsync htop mc net-tools apt-transport-https curl gnome-keyring && \
+RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-https curl gnome-keyring && \
     echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     rm -rf /var/lib/apt/list/* && \
     sudo passwd -d kasm-user && \
@@ -36,7 +36,11 @@ RUN ln -sf /usr/share/applications/windsurf.desktop $HOME/Desktop/windsurf.deskt
     chmod a+x $HOME/Desktop/windsurf.desktop && \
     wget https://images.wallpaperscraft.com/image/single/mycena_mushroom_nature_1443869_3840x2400.jpg -O /usr/share/backgrounds/bg_default.png
 
-RUN localectl set-locale ru_RU.UTF-8
+RUN locale-gen ru_RU.UTF-8 && \
+    update-locale LANG=ru_RU.UTF-8
+ENV LANG=ru_RU.UTF-8 \
+    LANGUAGE=ru_RU:ru \
+    LC_ALL=ru_RU.UTF-8
 
 ######### End Customizations ###########
 
