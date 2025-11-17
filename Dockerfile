@@ -30,6 +30,11 @@ RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-h
     echo '    . /home/kasm-user/.bashrc"' >> $HOME/.profile && \
     echo 'fi fi' >> $HOME/.profile
 
+# Устанавливаем node.js
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+ENV NVM_DIR=$HOME/.nvm
+RUN bash -c "source $NVM_DIR/nvm.sh && nvm install node"
+
 # Устанавливаем windsurf
 RUN wget -qO- "https://windsurf-stable.codeiumdata.com/wVxQEIWkwPUEAGf3/windsurf.gpg" | gpg --dearmor > /usr/share/keyrings/windsurf-stable.gpg && \
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/windsurf-stable.gpg] https://windsurf-stable.codeiumdata.com/wVxQEIWkwPUEAGf3/apt stable main" > /etc/apt/sources.list.d/windsurf.list && \
